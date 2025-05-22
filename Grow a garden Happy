@@ -1,0 +1,31 @@
+local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local TextBox = Instance.new("TextBox")
+local Button = Instance.new("TextButton")
+
+-- Set properties
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+Frame.Parent = ScreenGui
+Frame.Size = UDim2.new(0, 200, 0, 100)
+Frame.Position = UDim2.new(0.5, -100, 0.5, -50)
+
+TextBox.Parent = Frame
+TextBox.Size = UDim2.new(0, 180, 0, 40)
+TextBox.Position = UDim2.new(0, 10, 0, 10)
+TextBox.Text = "Enter Amount"
+
+Button.Parent = Frame
+Button.Size = UDim2.new(0, 180, 0, 40)
+Button.Position = UDim2.new(0, 10, 0, 50)
+Button.Text = "Buy Seed"
+
+-- Button function
+Button.MouseButton1Click:Connect(function()
+    local amount = tonumber(TextBox.Text)
+    if amount then
+        game:GetService("ReplicatedStorage").Remote.RemoteFunction.BuySeed:InvokeServer(100002, amount)
+    else
+        warn("Invalid input. Please enter a valid number.")
+    end
+end)
